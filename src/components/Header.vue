@@ -11,21 +11,21 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <!-- 淄博市中医医院 官方小程序 Header -->
+  <!-- 市中医医院 官方小程序 Header -->
   <header class="no-print bg-white/95 backdrop-blur-md text-slate-800 sticky top-0 z-40 border-b border-emerald-900/10 shadow-2xs">
     <div class="max-w-md mx-auto px-3.5 py-2.5 flex items-center justify-between">
       <!-- 医院官方标识与院名 -->
       <div class="flex items-center space-x-2.5">
         <!-- 中医特色医院徽章 (翡翠深绿 + 琥珀金) -->
         <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-800 to-teal-900 border border-amber-600/30 flex flex-col items-center justify-center text-white shadow-xs shrink-0">
-          <span class="text-[11px] font-serif font-black tracking-widest text-amber-300 leading-none">淄博</span>
+          <span class="text-[11px] font-serif font-black tracking-widest text-amber-300 leading-none">国医</span>
           <span class="text-[8px] font-sans font-medium text-emerald-100/90 leading-none mt-0.5">中医</span>
         </div>
 
         <div>
           <div class="flex items-center space-x-1.5">
-            <h1 class="text-[13px] font-black text-emerald-950 tracking-tight">
-              淄博市中医医院
+            <h1 class="text-[13px] font-black text-emerald-950 tracking-tight font-serif">
+              市中医医院
             </h1>
             <span class="px-1.5 py-0.2 bg-amber-50 text-amber-800 border border-amber-300/80 rounded text-[9px] font-bold font-serif">
               三甲

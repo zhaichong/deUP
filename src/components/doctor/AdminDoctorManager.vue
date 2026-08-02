@@ -175,7 +175,7 @@ async function handleSaveDoctor() {
               <div class="flex items-center space-x-1.5">
                 <h3 class="text-sm font-bold text-slate-900 font-serif">科室医生账号管理中心</h3>
                 <span class="text-[10px] px-1.5 py-0.5 bg-amber-50 text-amber-800 rounded font-semibold border border-amber-200">
-                  淄博市中医院
+                  三甲中医院
                 </span>
               </div>
               <p class="text-[10px] text-slate-400">管理、添加、修改与注销科室医生账号</p>

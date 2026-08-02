@@ -100,7 +100,7 @@ onMounted(() => {
 
       <!-- 小程序底部独立入口说明与角色隔离链接 -->
       <footer class="no-print text-center pt-4 pb-24 px-3 text-xs text-slate-400 border-t border-slate-200/60 bg-white space-y-2">
-        <p class="font-serif">© 2026 淄博市中医医院 · 脾胃病科（消化内镜室）</p>
+        <p class="font-serif">© 2026 市中医医院 · 脾胃病科（消化内镜室）</p>
         
         <!-- 独立端口切换链接 -->
         <div class="pt-1">

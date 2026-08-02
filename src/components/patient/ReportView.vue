@@ -58,23 +58,23 @@ function handleExportPDF() {
       </button>
     </div>
 
-    <!-- 淄博市中医医院 官方正规电子内镜检查报告单 Card -->
+    <!-- 市中医医院 官方正规电子内镜检查报告单 Card -->
     <div class="print-card bg-white rounded-3xl border border-emerald-900/10 p-6 shadow-sm space-y-6 relative overflow-hidden">
       <!-- 1. 医院正式抬头与报告单名称 -->
       <div class="border-b-2 border-emerald-900/80 pb-4 text-center relative space-y-1">
         <div class="flex items-center justify-center space-x-2">
           <div class="w-6 h-6 rounded-lg bg-emerald-800 text-amber-300 font-serif font-bold text-[10px] flex items-center justify-center">
-            淄中
+            国医
           </div>
           <h2 class="text-lg font-black tracking-wide text-slate-900 font-serif">
-            淄博市中医医院
+            市中医医院
           </h2>
           <span class="text-[10px] px-1.5 py-0.2 bg-amber-50 text-amber-800 border border-amber-300 rounded font-serif font-bold">
             三级甲等
           </span>
         </div>
         <p class="text-[9px] text-slate-400 font-sans tracking-widest uppercase">
-          Zibo Hospital of Traditional Chinese Medicine
+          Hospital of Traditional Chinese Medicine
         </p>
         <h3 class="text-sm font-bold text-emerald-900 tracking-wider font-serif pt-1">
           脾胃病科（消化内镜室）检查报告单
@@ -187,7 +187,7 @@ function handleExportPDF() {
         <div class="space-y-1">
           <div class="flex items-center space-x-1.5 text-emerald-800">
             <ShieldCheck class="w-4 h-4 text-emerald-700" />
-            <span class="font-bold">淄博市中医医院 · 电子报告防伪查验已核准</span>
+            <span class="font-bold">市中医医院 · 电子报告防伪查验已核准</span>
           </div>
           <p class="text-[10px] text-slate-400">报告医师：{{ record.doctorName }} | 审核医师：主任医师</p>
           <p class="text-[10px] text-slate-400">报告签发时间：{{ record.examDate }}</p>
@@ -196,7 +196,7 @@ function handleExportPDF() {
         <!-- 拟真中医院朱砂红防伪印章 -->
         <div class="relative -mr-2">
           <div class="w-20 h-20 rounded-full border-2 border-red-600/80 text-red-600 flex flex-col items-center justify-center p-1 text-center rotate-[-12deg] select-none opacity-85 shadow-2xs pointer-events-none">
-            <span class="text-[7px] font-serif font-black tracking-widest leading-none">★ 淄博市中医医院 ★</span>
+            <span class="text-[7.5px] font-serif font-black tracking-widest leading-none">★ 市中医医院 ★</span>
             <span class="text-[8px] font-serif font-bold my-0.5 leading-none">检验专用章</span>
             <span class="text-[6px] font-mono leading-none">(电子防伪11)</span>
           </div>

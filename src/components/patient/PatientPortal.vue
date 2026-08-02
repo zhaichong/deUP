@@ -27,7 +27,7 @@ const selectedRecord = ref<PatientRecord | null>(null);
 const isSearching = ref(false);
 const errorMessage = ref('');
 
-// 淄博市中医医院演示测试身份证号
+// 演示测试身份证号
 const DEMO_ID_CARD = '110101197405122334';
 
 async function handleSearch(targetId?: string) {
@@ -84,7 +84,7 @@ function resetSearch() {
       @back="selectedRecord = null"
     />
 
-    <!-- 患者端主界面 (淄博市中医医院定制风格) -->
+    <!-- 患者端主界面 (市中医医院定制风格) -->
     <div v-else class="space-y-4">
       <!-- 1. 医院官方服务公告与院训标语横幅 -->
       <div class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-teal-900 rounded-3xl p-5 text-white shadow-sm border border-amber-500/30 relative overflow-hidden">
@@ -103,8 +103,8 @@ function resetSearch() {
           </div>
 
           <div>
-            <h2 class="text-base font-bold text-white tracking-tight">
-              淄博市中医医院 · 脾胃病科
+            <h2 class="text-base font-bold text-white tracking-tight font-serif">
+              市中医医院 · 脾胃病科
             </h2>
             <p class="text-xs text-emerald-100/80 mt-0.5">
               电子内镜中心（胃镜 / 结肠镜）报告调阅便民服务
@@ -116,7 +116,7 @@ function resetSearch() {
       <!-- 2. 查询卡片 (Hospital Query Card) -->
       <div class="bg-white rounded-3xl p-5 border border-emerald-900/10 shadow-xs space-y-4">
         <div class="space-y-1">
-          <h3 class="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+          <h3 class="text-sm font-bold text-slate-900 flex items-center gap-1.5 font-serif">
             <CreditCard class="w-4 h-4 text-emerald-700" />
             患者凭证查询
           </h3>
@@ -176,7 +176,7 @@ function resetSearch() {
             class="px-2.5 py-1 bg-amber-50 hover:bg-amber-100/80 text-amber-900 border border-amber-200/80 rounded-xl text-[11px] font-medium transition flex items-center space-x-1"
           >
             <Sparkles class="w-3 h-3 text-amber-600" />
-            <span>填入淄博市中医医院示例号</span>
+            <span>填入示范病历身份证号</span>
           </button>
         </div>
       </div>
@@ -239,7 +239,7 @@ function resetSearch() {
               </div>
               <div class="col-span-2 flex items-center space-x-1.5 text-slate-500 pt-1 border-t border-slate-200/50">
                 <Building2 class="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-                <span>就诊科室: <strong>淄博市中医医院 · {{ rec.department || '脾胃病科（消化内镜室）' }}</strong></span>
+                <span>就诊科室: <strong>市中医医院 · {{ rec.department || '脾胃病科（消化内镜室）' }}</strong></span>
               </div>
             </div>
 
@@ -282,7 +282,7 @@ function resetSearch() {
 
             <!-- 底部跳转卡片条 -->
             <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
-              <span class="text-[11px] text-slate-400 font-serif">淄博市中医医院 · 官方防伪</span>
+              <span class="text-[11px] text-slate-400 font-serif">市中医医院 · 官方防伪</span>
               <span class="text-xs font-bold text-emerald-700 group-hover:translate-x-1 transition flex items-center gap-1">
                 查看完整报告 & 导出 PDF <ChevronRight class="w-4 h-4" />
               </span>
@@ -291,10 +291,10 @@ function resetSearch() {
         </div>
       </div>
 
-      <!-- 4. 淄博市中医医院便民就医与调阅指南 -->
+      <!-- 4. 便民就医与调阅指南 -->
       <div v-else class="bg-white rounded-3xl p-5 border border-emerald-900/10 shadow-xs space-y-4">
         <div class="flex items-center justify-between">
-          <h3 class="text-xs font-bold text-slate-900 flex items-center gap-1.5">
+          <h3 class="text-xs font-bold text-slate-900 flex items-center gap-1.5 font-serif">
             <BookOpen class="w-4 h-4 text-emerald-700" />
             内镜检查调阅流程指南
           </h3>
@@ -329,7 +329,7 @@ function resetSearch() {
 
         <div class="p-3 bg-amber-50/60 rounded-2xl border border-amber-200/80 text-amber-950 text-[11px] leading-relaxed flex items-start space-x-2">
           <HeartPulse class="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
-          <span>温馨提示：内镜检查后请遵医嘱留观休息，2小时内禁食禁水；如需中药调理或进一步诊疗，可前往淄博市中医医院脾胃病科门诊复诊。</span>
+          <span>温馨提示：内镜检查后请遵医嘱留观休息，2小时内禁食禁水；如需中药调理或进一步诊疗，可前往脾胃病科门诊复诊。</span>
         </div>
       </div>
     </div>

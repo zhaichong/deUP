@@ -51,7 +51,7 @@ function fillDoctorAccount() {
         </div>
         <div>
           <div class="flex items-center gap-1.5">
-            <h2 class="text-base font-bold font-serif">淄博市中医医院</h2>
+            <h2 class="text-base font-bold font-serif">市中医医院</h2>
             <span class="text-[9px] px-1.5 py-0.2 bg-amber-400/20 text-amber-300 border border-amber-400/40 rounded font-serif">三甲</span>
           </div>
           <p class="text-xs text-emerald-200/80">脾胃病科（内镜室）· 医生工作台</p>
