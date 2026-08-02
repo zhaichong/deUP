@@ -240,6 +240,20 @@ export function loginDoctorDB(username: string, password: string): DoctorUser {
   };
 }
 
+// 删除医生账户 (管理员权限，不可删除系统内置管理员)
+export function deleteDoctorDB(id: string): boolean {
+  const doc = db.prepare('SELECT * FROM doctors WHERE id = ?').get(id) as any;
+  if (!doc) {
+    throw new Error('未找到该医生账号');
+  }
+  if (doc.role === 'admin' || doc.username === 'admin') {
+    throw new Error('系统内置管理员账号受保护，不可删除');
+  }
+
+  const res = db.prepare('DELETE FROM doctors WHERE id = ?').run(id);
+  return res.changes > 0;
+}
+
 // 获取所有已注册医生用户列表（供管理员查阅与修改）
 export function getAllDoctorsDB(): DoctorUser[] {
   const stmt = db.prepare('SELECT id, username, name, title, department, role, createdAt FROM doctors ORDER BY createdAt DESC');

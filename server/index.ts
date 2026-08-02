@@ -11,6 +11,7 @@ import {
   resetDemoDB,
   registerDoctorDB,
   updateDoctorDB,
+  deleteDoctorDB,
   loginDoctorDB,
   getAllDoctorsDB
 } from './db';
@@ -96,6 +97,17 @@ app.get('/api/doctors', (_req, res) => {
     res.json(doctors);
   } catch (err) {
     res.status(500).json({ error: '获取医生列表失败' });
+  }
+});
+
+// API 路由: 管理员注销/删除医生账号
+app.delete('/api/doctors/:id', (req, res) => {
+  const { id } = req.params;
+  try {
+    const success = deleteDoctorDB(id);
+    res.json({ success });
+  } catch (err: any) {
+    res.status(400).json({ error: err.message || '删除医生账号失败' });
   }
 });
 

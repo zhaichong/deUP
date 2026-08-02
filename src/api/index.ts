@@ -105,9 +105,30 @@ export async function fetchDoctorsList(): Promise<DoctorSession[]> {
       return await res.json();
     }
   } catch (e) {
-    console.error('获取医生账号列表失败');
+    console.error('获取医生账号列表失败', e);
   }
   return [];
+}
+
+/**
+ * 管理员删除/注销医生账号
+ */
+export async function deleteDoctor(id: string): Promise<boolean> {
+  const res = await fetch(`${API_BASE}/api/doctors/${id}`, {
+    method: 'DELETE'
+  });
+
+  const contentType = res.headers.get('content-type') || '';
+  if (!contentType.includes('application/json')) {
+    throw new Error(`后端接口响应异常 (${res.status})`);
+  }
+
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.error || '删除医生账号失败');
+  }
+
+  return true;
 }
 
 /**
