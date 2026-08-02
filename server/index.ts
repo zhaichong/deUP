@@ -160,6 +160,19 @@ app.post('/api/reset-demo', (_req, res) => {
   }
 });
 
+// 托管前端打好的静态代码 dist (生产环境入口)
+const distDir = path.join(process.cwd(), 'dist');
+if (fs.existsSync(distDir)) {
+  app.use(express.static(distDir));
+
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
+      return next();
+    }
+    res.sendFile(path.join(distDir, 'index.html'));
+  });
+}
+
 // 启动服务器
 app.listen(PORT, () => {
   console.log(`[Endoscopy Backend Server] 医生上传与患者调阅后端服务已启动: http://localhost:${PORT}`);
