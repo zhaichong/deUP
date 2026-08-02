@@ -25,7 +25,7 @@ const formUsername = ref('');
 const formPassword = ref('');
 const formName = ref('');
 const formTitle = ref('医师');
-const formDepartment = ref('消化内科内镜中心');
+const formDepartment = ref('脾胃病科（消化内镜室）');
 
 async function loadDoctors() {
   isLoading.value = true;
@@ -44,7 +44,7 @@ function openAddModal() {
   formPassword.value = '';
   formName.value = '';
   formTitle.value = '医师';
-  formDepartment.value = '消化内科内镜中心';
+  formDepartment.value = '脾胃病科（消化内镜室）';
   errorMessage.value = '';
   successMessage.value = '';
 }
@@ -56,7 +56,7 @@ function openEditModal(doc: DoctorSession) {
   formPassword.value = ''; // 留空不修改
   formName.value = doc.name;
   formTitle.value = doc.title || '医师';
-  formDepartment.value = doc.department || '消化内科内镜中心';
+  formDepartment.value = doc.department || '脾胃病科（消化内镜室）';
   errorMessage.value = '';
   successMessage.value = '';
 }
@@ -264,7 +264,7 @@ onMounted(() => {
               <input
                 v-model="formDepartment"
                 type="text"
-                placeholder="例如: 消化内科内镜中心"
+                placeholder="例如: 脾胃病科（消化内镜室）"
                 class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
               />
             </div>

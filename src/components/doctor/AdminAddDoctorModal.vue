@@ -16,7 +16,7 @@ const username = ref('');
 const password = ref('');
 const name = ref('');
 const title = ref('医师');
-const department = ref('消化内科内镜中心');
+const department = ref('脾胃病科（消化内镜室）');
 
 const errorMessage = ref('');
 const isLoading = ref(false);
@@ -140,7 +140,7 @@ async function handleSubmit() {
             <input
               v-model="department"
               type="text"
-              placeholder="例如: 消化内科内镜中心"
+              placeholder="例如: 脾胃病科（消化内镜室）"
               class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
             />
           </div>

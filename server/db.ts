@@ -88,7 +88,7 @@ const INITIAL_RECORDS: PatientRecord[] = [
     examType: '电子胃镜',
     examDate: '2026-08-01',
     doctorName: '李伟 主任医师',
-    department: '消化内科内镜中心',
+    department: '脾胃病科（消化内镜室）',
     findings: '食管黏膜光滑，管腔通畅。胃窦黏膜充血水肿，可见多发红斑及散在浅表糜烂；胃体小弯侧见一约0.8cm息肉样隆起。',
     diagnosis: '1. 慢性浅表性胃炎伴糜烂\n2. 胃体息肉（建议内镜切除）',
     recommendations: '定期复查胃镜。清淡饮食。',
@@ -153,7 +153,7 @@ export function seedDatabaseIfEmpty() {
     // 1. 管理员账户
     insertDoc.run('doc-admin', 'admin', 'admin', '系统管理员', '主任', '内镜中心管理处', 'admin', Date.now());
     // 2. 示范医生账户
-    insertDoc.run('doc-001', 'doctor', '123456', '李伟', '主任医师', '消化内科内镜中心', 'doctor', Date.now());
+    insertDoc.run('doc-001', 'doctor', '123456', '李伟', '主任医师', '脾胃病科（消化内镜室）', 'doctor', Date.now());
   }
 }
 
