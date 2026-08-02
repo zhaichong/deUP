@@ -3,10 +3,10 @@ import { ref, onMounted } from 'vue';
 import type { PatientRecord } from '../../types';
 import { getCurrentDoctor, logoutDoctor, type DoctorSession } from '../../api';
 import DoctorAuth from './DoctorAuth.vue';
-import AdminAddDoctorModal from './AdminAddDoctorModal.vue';
+import AdminDoctorManager from './AdminDoctorManager.vue';
 import UploadForm from './UploadForm.vue';
 import RecordList from './RecordList.vue';
-import { Camera, FileText, UserCheck, LogOut, UserPlus } from 'lucide-vue-next';
+import { Camera, FileText, UserCheck, LogOut, Users } from 'lucide-vue-next';
 
 const props = defineProps<{
   records: PatientRecord[];
@@ -21,9 +21,8 @@ const emit = defineEmits<{
 const currentDoctor = ref<DoctorSession | null>(null);
 const activeTab = ref<'upload' | 'list'>('upload');
 
-// 管理员添加医生 Modal 弹窗
-const showAddDoctorModal = ref(false);
-const adminSuccessToast = ref('');
+// 管理员管理医生 Modal 弹窗
+const showDoctorManagerModal = ref(false);
 
 function checkAuth() {
   currentDoctor.value = getCurrentDoctor();
@@ -32,13 +31,6 @@ function checkAuth() {
 function handleLoginSuccess(session: DoctorSession) {
   currentDoctor.value = session;
   activeTab.value = 'upload';
-}
-
-function handleDoctorCreated(newDoc: DoctorSession) {
-  adminSuccessToast.value = `成功创建新医生账号【${newDoc.name}】(@${newDoc.username})`;
-  setTimeout(() => {
-    adminSuccessToast.value = '';
-  }, 3000);
 }
 
 function handleLogout() {
@@ -64,7 +56,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <!-- 情况一: 未登录时，渲染统一医务/管理员登录卡片 (无公开注册) -->
+    <!-- 情况一: 未登录时，渲染统一医务/管理员登录卡片 -->
     <DoctorAuth
       v-if="!currentDoctor"
       @loginSuccess="handleLoginSuccess"
@@ -100,15 +92,15 @@ onMounted(() => {
         </div>
 
         <div class="flex items-center space-x-1.5">
-          <!-- 只有管理员登录后，才会显示“增加新医生账号”按钮 -->
+          <!-- 只有管理员登录后，才会显示“医生账号管理”特权按钮 -->
           <button
             v-if="currentDoctor.role === 'admin'"
-            @click="showAddDoctorModal = true"
+            @click="showDoctorManagerModal = true"
             class="flex items-center space-x-1 px-2.5 py-1 bg-cyan-600 hover:bg-cyan-700 text-white rounded-xl text-[11px] font-bold shadow-sm transition active:scale-95"
-            title="管理员特权：添加新医生账号"
+            title="管理员特权：添加与修改医生账号"
           >
-            <UserPlus class="w-3.5 h-3.5" />
-            <span>添加医生账号</span>
+            <Users class="w-3.5 h-3.5" />
+            <span>账号管理</span>
           </button>
 
           <button
@@ -120,12 +112,6 @@ onMounted(() => {
             <span>退出</span>
           </button>
         </div>
-      </div>
-
-      <!-- 管理员创建新医生成功的 Toast 提示 -->
-      <div v-if="adminSuccessToast" class="p-3 bg-cyan-50 text-cyan-800 rounded-2xl text-xs flex items-center justify-between border border-cyan-200 animate-fade-in">
-        <span class="font-bold">{{ adminSuccessToast }}</span>
-        <button @click="adminSuccessToast = ''" class="text-cyan-600 hover:text-cyan-900">&times;</button>
       </div>
 
       <!-- 视图 1: 手机端拍照录入表单 -->
@@ -167,11 +153,10 @@ onMounted(() => {
       </div>
     </div>
 
-    <!-- 管理员添加新医生账号 Modal 弹窗 -->
-    <AdminAddDoctorModal
-      :show="showAddDoctorModal"
-      @close="showAddDoctorModal = false"
-      @created="handleDoctorCreated"
+    <!-- 管理员医生账号管理 Modal 弹窗 -->
+    <AdminDoctorManager
+      :show="showDoctorManagerModal"
+      @close="showDoctorManagerModal = false"
     />
   </div>
 </template>

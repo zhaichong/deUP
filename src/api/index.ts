@@ -68,6 +68,34 @@ export async function registerDoctor(params: {
 }
 
 /**
+ * 管理员编辑/更新医生账户 API
+ */
+export async function updateDoctor(id: string, params: {
+  name?: string;
+  title?: string;
+  department?: string;
+  password?: string;
+}): Promise<DoctorSession> {
+  const res = await fetch(`${API_BASE}/api/doctors/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(params)
+  });
+
+  const contentType = res.headers.get('content-type') || '';
+  if (!contentType.includes('application/json')) {
+    throw new Error(`后端接口响应异常 (${res.status})`);
+  }
+
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.error || '修改医生账号失败');
+  }
+
+  return data;
+}
+
+/**
  * 管理员拉取全部医生账号列表
  */
 export async function fetchDoctorsList(): Promise<DoctorSession[]> {

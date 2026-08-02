@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import type { PatientRecord } from '../../types';
 import { maskIdCard, maskPhone } from '../../utils/validators';
 import ImageViewerModal from '../common/ImageViewerModal.vue';
-import { ArrowLeft, ShieldCheck, Stethoscope, ZoomIn } from 'lucide-vue-next';
+import { ArrowLeft, ShieldCheck, Stethoscope, ZoomIn, Printer, FileDown } from 'lucide-vue-next';
 
 const props = defineProps<{
   record: PatientRecord;
@@ -21,6 +21,10 @@ function openImage(index: number) {
   lightboxIndex.value = index;
   showLightbox.value = true;
 }
+
+function handleExportPDF() {
+  window.print();
+}
 </script>
 
 <template>
@@ -33,6 +37,14 @@ function openImage(index: number) {
       >
         <ArrowLeft class="w-4 h-4" />
         <span>返回查询入口</span>
+      </button>
+
+      <button
+        @click="handleExportPDF"
+        class="flex items-center space-x-1.5 px-3.5 py-1.5 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white text-xs font-bold rounded-xl transition shadow-md active:scale-95"
+      >
+        <FileDown class="w-4 h-4" />
+        <span>导出 / 打印 PDF 报告</span>
       </button>
     </div>
 
@@ -116,7 +128,7 @@ function openImage(index: number) {
           <h4 class="text-xs font-bold text-slate-900 flex items-center gap-1.5 border-l-3 border-teal-600 pl-2">
             内镜高清影像图谱 ({{ record.images.length }}张)
           </h4>
-          <span class="text-[10px] text-teal-600 font-medium">点击可全屏放大查看细节</span>
+          <span class="no-print text-[10px] text-teal-600 font-medium">点击可全屏放大查看细节</span>
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -129,7 +141,7 @@ function openImage(index: number) {
             <img :src="img.url" :alt="img.name" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
             
             <!-- 放大镜图标 hover -->
-            <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
+            <div class="no-print absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
               <ZoomIn class="w-7 h-7 text-white drop-shadow" />
             </div>
 

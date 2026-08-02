@@ -196,6 +196,33 @@ export function registerDoctorDB(doc: { username: string; password: string; name
   };
 }
 
+// 修改编辑医生账户资料与密码 (管理员权限)
+export function updateDoctorDB(id: string, data: { name?: string; title?: string; department?: string; password?: string }): DoctorUser {
+  const doctor = db.prepare('SELECT * FROM doctors WHERE id = ?').get(id) as any;
+  if (!doctor) {
+    throw new Error('未找到要修改的医生账号');
+  }
+
+  const newName = data.name !== undefined ? data.name.trim() : doctor.name;
+  const newTitle = data.title !== undefined ? data.title.trim() : doctor.title;
+  const newDept = data.department !== undefined ? data.department.trim() : doctor.department;
+  const newPass = data.password && data.password.trim() ? data.password.trim() : doctor.password;
+
+  db.prepare(`
+    UPDATE doctors SET name = ?, title = ?, department = ?, password = ? WHERE id = ?
+  `).run(newName, newTitle, newDept, newPass, id);
+
+  return {
+    id: doctor.id,
+    username: doctor.username,
+    name: newName,
+    title: newTitle,
+    department: newDept,
+    role: doctor.role,
+    createdAt: doctor.createdAt
+  };
+}
+
 export function loginDoctorDB(username: string, password: string): DoctorUser {
   const stmt = db.prepare('SELECT * FROM doctors WHERE username = ? AND password = ?');
   const user = stmt.get(username.trim(), password) as any;
@@ -213,7 +240,7 @@ export function loginDoctorDB(username: string, password: string): DoctorUser {
   };
 }
 
-// 获取所有已注册医生用户列表（供管理员查阅）
+// 获取所有已注册医生用户列表（供管理员查阅与修改）
 export function getAllDoctorsDB(): DoctorUser[] {
   const stmt = db.prepare('SELECT id, username, name, title, department, role, createdAt FROM doctors ORDER BY createdAt DESC');
   return stmt.all() as DoctorUser[];

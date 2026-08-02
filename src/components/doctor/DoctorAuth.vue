@@ -33,16 +33,10 @@ async function handleLogin() {
   }
 }
 
-// 快速填入快捷体验账号
+// 快捷填入示范医生账号
 function fillDoctorAccount() {
   loginUsername.value = 'doctor';
   loginPassword.value = '123456';
-  handleLogin();
-}
-
-function fillAdminAccount() {
-  loginUsername.value = 'admin';
-  loginPassword.value = 'admin';
   handleLogin();
 }
 </script>
@@ -87,8 +81,8 @@ function fillAdminAccount() {
           <input
             v-model="loginUsername"
             type="text"
-            placeholder="请输入账号 (如 doctor 或 admin)"
-            class="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
+            placeholder="请输入账号 (如 doctor)"
+            class="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none font-medium text-slate-800"
           />
         </div>
 
@@ -100,7 +94,7 @@ function fillAdminAccount() {
             v-model="loginPassword"
             type="password"
             placeholder="请输入密码"
-            class="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
+            class="w-full px-3.5 py-2.5 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500 focus:outline-none font-medium text-slate-800"
           />
         </div>
 
@@ -113,31 +107,28 @@ function fillAdminAccount() {
           <span>{{ isLoading ? '验证中...' : '登录工作台' }}</span>
         </button>
 
-        <!-- 演示账号快捷选项 -->
+        <!-- 演示账号快捷选项 (仅保留普通医生示范账号) -->
         <div class="pt-3 border-t border-slate-100 text-xs space-y-2">
           <div class="flex items-center space-x-1 font-bold text-slate-700">
-            <Sparkles class="w-3.5 h-3.5 text-amber-500" /> 快捷体验预置账号：
+            <Sparkles class="w-3.5 h-3.5 text-amber-500" /> 快捷体验测试账号：
           </div>
 
-          <div class="grid grid-cols-2 gap-2">
+          <div>
             <button
               type="button"
               @click="fillDoctorAccount"
-              class="p-2 bg-teal-50/80 hover:bg-teal-100 text-teal-800 rounded-xl border border-teal-200/60 transition text-[11px] text-left"
+              class="w-full p-2.5 bg-teal-50/80 hover:bg-teal-100 text-teal-800 rounded-xl border border-teal-200/60 transition text-[11px] flex items-center justify-between font-medium"
             >
-              <span class="block font-bold">1. 普通医生账号</span>
+              <span class="font-bold flex items-center gap-1">
+                <User class="w-3.5 h-3.5 text-teal-600" /> 示范医生体验账号
+              </span>
               <span class="font-mono text-slate-500">doctor / 123456</span>
             </button>
-
-            <button
-              type="button"
-              @click="fillAdminAccount"
-              class="p-2 bg-cyan-50/80 hover:bg-cyan-100 text-cyan-800 rounded-xl border border-cyan-200/60 transition text-[11px] text-left"
-            >
-              <span class="block font-bold">2. 科室管理员账号</span>
-              <span class="font-mono text-slate-500">admin / admin</span>
-            </button>
           </div>
+          
+          <p class="text-[10px] text-slate-400 text-center pt-1">
+            提示：管理员账号属于系统管理权限，不公开提供快捷点击按钮。
+          </p>
         </div>
       </form>
     </div>

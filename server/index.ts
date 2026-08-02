@@ -10,6 +10,7 @@ import {
   deleteRecordFromDB,
   resetDemoDB,
   registerDoctorDB,
+  updateDoctorDB,
   loginDoctorDB,
   getAllDoctorsDB
 } from './db';
@@ -72,6 +73,19 @@ app.post('/api/doctors/register', (req, res) => {
     res.json(doctor);
   } catch (err: any) {
     res.status(400).json({ error: err.message || '创建医生账号失败' });
+  }
+});
+
+// API 路由: 管理员修改/更新医生用户资料或密码
+app.put('/api/doctors/:id', (req, res) => {
+  const { id } = req.params;
+  const { name, title, department, password } = req.body;
+
+  try {
+    const updated = updateDoctorDB(id, { name, title, department, password });
+    res.json(updated);
+  } catch (err: any) {
+    res.status(400).json({ error: err.message || '修改医生信息失败' });
   }
 });
 
