@@ -1,6 +1,5 @@
-# 依赖与打包产物
+# 依赖与临时本地测试文件
 node_modules
-dist
 dist-ssr
 *.local
 

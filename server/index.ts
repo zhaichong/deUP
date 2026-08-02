@@ -160,18 +160,32 @@ app.post('/api/reset-demo', (_req, res) => {
   }
 });
 
-// 托管前端打好的静态代码 dist (生产环境入口)
-const distDir = path.join(process.cwd(), 'dist');
-if (fs.existsSync(distDir)) {
-  app.use(express.static(distDir));
+// 托管前端打包产物 dist (生产环境单端口服务)
+const distDir = path.resolve(process.cwd(), 'dist');
+console.log(`[Endoscopy Server] 前端静态资源目录: ${distDir} (存在状态: ${fs.existsSync(distDir)})`);
 
-  app.get('*', (req, res, next) => {
-    if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
-      return next();
-    }
-    res.sendFile(path.join(distDir, 'index.html'));
-  });
-}
+app.use(express.static(distDir));
+
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
+    return next();
+  }
+  const indexPath = path.join(distDir, 'index.html');
+  if (fs.existsSync(indexPath)) {
+    res.sendFile(indexPath);
+  } else {
+    res.status(500).send(`
+      <!DOCTYPE html>
+      <html>
+        <head><title>DeUP System Initializing</title></head>
+        <body style="font-family:sans-serif;text-align:center;padding:50px;">
+          <h2>内镜云平台服务启动中...</h2>
+          <p>前端静态资源正在编译，请刷新页面。</p>
+        </body>
+      </html>
+    `);
+  }
+});
 
 // 启动服务器
 app.listen(PORT, () => {
