@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  deup-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: deup-endoscopy-server
+    restart: always
+    ports:
+      - "3001:3001"
+    volumes:
+      # 持久化映射 SQLite 数据库文件与上传的图片
+      - ./server/endoscopy.db:/app/server/endoscopy.db
+      - ./server/uploads:/app/server/uploads
+    environment:
+      - PORT=3001
+      - NODE_ENV=production

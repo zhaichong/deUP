@@ -1,0 +1,41 @@
+# -------------------------------------------------------------
+# Nginx 反向代理与 HTTPS SSL 配置文件模版 (生产环境部署)
+# 部署路径建议: /etc/nginx/conf.d/deup.conf
+# -------------------------------------------------------------
+
+server {
+    listen 80;
+    server_name your-domain.com; # 替换为您的公网域名或服务器IP地址
+
+    # 自动重定向 HTTP 到 HTTPS 8
+    # return 301 https://$host$request_uri;
+
+    # 如果暂未配置 SSL 证书，可直接保留以下配置：
+    client_max_body_size 50M;
+
+    # 1. 静态托管前端打包代码 dist
+    location / {
+        root /var/www/deup/dist;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+    }
+
+    # 2. 静态托管上传的内镜图片资源
+    location /uploads/ {
+        alias /var/www/deup/server/uploads/;
+        expires 30d;
+        add_header Cache-Control "public, no-transform";
+    }
+
+    # 3. 反向代理后端 Express API 服务 (端口 3001)
+    location /api/ {
+        proxy_pass http://127.0.0.1:3001;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
