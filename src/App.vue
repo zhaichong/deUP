@@ -100,14 +100,14 @@ onMounted(() => {
 
       <!-- 小程序底部独立入口说明与角色隔离链接 -->
       <footer class="no-print text-center pt-4 pb-24 px-3 text-xs text-slate-400 border-t border-slate-200/60 bg-white space-y-2">
-        <p class="font-serif">© 2026 市中医医院 · 脾胃病科（消化内镜室）</p>
+        <p>© 2026 智慧医疗内镜云平台</p>
         
         <!-- 独立端口切换链接 -->
         <div class="pt-1">
           <button
             v-if="activeMode === 'patient'"
             @click="switchMode('doctor')"
-            class="inline-flex items-center space-x-1 text-[11px] text-slate-400 hover:text-emerald-700 transition underline decoration-dotted"
+            class="inline-flex items-center space-x-1 text-[11px] text-slate-400 hover:text-teal-600 transition underline decoration-dotted"
           >
             <Stethoscope class="w-3.5 h-3.5" />
             <span>医务人员工作台入口 &rarr;</span>
@@ -116,7 +116,7 @@ onMounted(() => {
           <button
             v-else
             @click="switchMode('patient')"
-            class="inline-flex items-center space-x-1 text-[11px] text-emerald-700 hover:text-emerald-800 font-medium transition underline"
+            class="inline-flex items-center space-x-1 text-[11px] text-teal-600 hover:text-teal-700 font-medium transition underline"
           >
             <UserCheck class="w-3.5 h-3.5" />
             <span>&larr; 返回患者查询入口</span>

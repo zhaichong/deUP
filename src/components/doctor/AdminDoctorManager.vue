@@ -168,14 +168,14 @@ async function handleSaveDoctor() {
         <!-- 弹窗 Header -->
         <div class="flex items-center justify-between border-b border-slate-100 pb-3.5 shrink-0">
           <div class="flex items-center space-x-2.5">
-            <div class="w-9 h-9 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold shadow-xs">
+            <div class="w-9 h-9 rounded-2xl bg-teal-100 text-teal-800 flex items-center justify-center font-bold shadow-xs">
               <Users class="w-5 h-5" />
             </div>
             <div>
               <div class="flex items-center space-x-1.5">
-                <h3 class="text-sm font-bold text-slate-900 font-serif">科室医生账号管理中心</h3>
-                <span class="text-[10px] px-1.5 py-0.5 bg-amber-50 text-amber-800 rounded font-semibold border border-amber-200">
-                  三甲中医院
+                <h3 class="text-sm font-bold text-slate-900">科室医生账号管理中心</h3>
+                <span class="text-[10px] px-1.5 py-0.5 bg-teal-50 text-teal-800 rounded font-semibold border border-teal-200">
+                  管理员
                 </span>
               </div>
               <p class="text-[10px] text-slate-400">管理、添加、修改与注销科室医生账号</p>
