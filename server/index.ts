@@ -180,7 +180,9 @@ console.log(`[Endoscopy Server] 前端静态资源目录: ${distDir} (存在状�
 
 app.use(express.static(distDir));
 
-app.get('*', (req, res, next) => {
+// Express 5 兼容的全局网页路由回退
+app.use((req, res, next) => {
+  if (req.method !== 'GET') return next();
   if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
     return next();
   }
