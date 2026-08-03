@@ -7,9 +7,12 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-# 复制 package 配置并安装依赖
+# 安装原生模块编译所需的底层构建工具
+RUN apk add --no-cache python3 make g++
+
+# 复制 package 配置并安装依赖（使用 npm install 兼容版本差异）
 COPY package*.json ./
-RUN npm ci
+RUN npm install
 
 # 复制项目所有源码
 COPY . .
@@ -23,13 +26,11 @@ FROM node:22-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 
-# 复制构建物与服务端资源
-COPY package*.json ./
-RUN npm ci --only=production
-
+# 复制前端静态文件、服务端源码、完整 node_modules 及 package 配置
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/server ./server
 COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
 
 # 确保 SQLite 数据库及图片上传目录存在
 RUN mkdir -p /app/server/uploads
@@ -37,3 +38,4 @@ RUN mkdir -p /app/server/uploads
 EXPOSE 3001
 
 CMD ["npx", "tsx", "server/index.ts"]
+
